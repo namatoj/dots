@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #map {
+            padding: 0;
+            margin: 0 0 0 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .marker {
+            background-image: url('cross.png');
+            background-size: cover;
+            width: 20vmin;
+            height: 20vmin;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='map'></div>
+
+    <script>
+        const startPosition = [13.00, 55.59]
+        mapboxgl.accessToken = 'pk.eyJ1IjoibmFtYXRvaiIsImEiOiJjaWk0bW0zYXcwMDQ1dmNtMnhzb21vOXVjIn0.KUflnrb58f71M-j3INmVKQ';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: startPosition, // starting position [lng, lat]
+            zoom: 11 // starting zoom
+        });
+
+        const markerElement = document.createElement('div')
+        markerElement.className = 'marker'
+
+        const marker = new mapboxgl.Marker(markerElement, {
+            draggable: true
+        }).setLngLat(startPosition)
+
+        const onMapMove = (e) => {
+            marker.setLngLat(map.getCenter())
+
+        }
+        const onMapClick = (e) => {
+            map.flyTo({ center: e.lngLat })
+        }
+
+        map.on('load', () => {
+            map.addControl(new mapboxgl.NavigationControl());
+
+
+            marker.addTo(map)
+
+            map.on('move', onMapMove)
+            map.on('click', onMapClick)
+
+        })
+
+
+        const socket = io("http://localhost:3000");
+
+
+    </script>
+
+</body>
+
+</html>
