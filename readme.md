@@ -9,7 +9,7 @@ Start with:
   - [x] Add add button
   - [x] Add remove button
 - [x] Append a command log when clicking buttons
-- [ ] Parse command log to GeoJson
+- [x] Parse command log to GeoJson
 - [ ] Send commands when clicking the buttons on sockets.io
 - [x] Build with webpack
 - [ ] Use environment variable for sockets.io url
@@ -19,3 +19,6 @@ Start with:
 - [x] Get closest point property to position.
 - [ ] Fix import of turfDistance
 - [x] set mapboxgl.accessToken as environment var.
+- [x] add render function.
+- [ ] listen to commands from sockets.io
+- [ ] push to heroku

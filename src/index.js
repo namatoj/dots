@@ -58,7 +58,6 @@ map.on('load', () => {
         'source': 'dots',
         'paint': {
             'circle-color': ["get", "color"],
-            // 'circle-color': "#ff0000",
             'circle-radius': 6,
             'circle-stroke-width': 2,
             'circle-stroke-color': '#ffffff'
@@ -73,28 +72,56 @@ let currentColor = "#" + (queryColor ? queryColor : "000000")
 
 console.log(currentColor)
 
+
+const Action = {
+    ADD_POINT: "ADD_POINT",
+    REMOVE_POINT: "REMOVE_POINT"
+}
+
+const createPointFeature = (command) => {
+    return ({
+        "type": "Feature",
+        "properties": {
+            "color": command.params.color,
+            "id": command.params.id
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [command.params.lng, command.params.lat],
+        }
+    })
+}
+
+// render function is responsible for interpreting the commandLog
+// and make sure that the map data is updated.
+// This function should be called every time the commandLog has
+// been changed.
+const render = () => {
+    let features = []
+    for (const command of commandLog) {
+        if (command.action === Action.ADD_POINT) {
+            features.push(
+                createPointFeature(command)
+            )
+        }
+        else if (command.action === Action.REMOVE_POINT) {
+            features = features.filter((feature) => {
+                return feature.properties.id !== command.params.id
+            })
+        }
+    }
+
+    data.features = [...features];
+    map.getSource('dots').setData(data)
+}
+
 const addPoint = () => {
     const position = marker.getLngLat()
     const uuid = uuidv4()
-    data.features.push(
-        {
-            "type": "Feature",
-            "properties": {
-                "color": currentColor,
-                "id": uuid
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [position.lng, position.lat],
-            }
-        }
-    )
-    map.getSource('dots').setData(data)
-    console.log(data)
 
     // Create command and push it to command log
     const command = {
-        "action": "ADD_POINT",
+        "action": Action.ADD_POINT,
         "params": {
             "id": uuid,
             "lng": position.lng,
@@ -103,12 +130,14 @@ const addPoint = () => {
         }
     }
     commandLog.push(command)
-    console.log(commandLog)
+    render()
 }
-const removePoint = () => {
 
-    console.log("remove")
+const removePoint = () => {
     // Find closest point among features to marker position.
+    if (data.features.length === 0) {
+        return
+    }
     const markerPos = marker.getLngLat()
     for (const point of data.features) {
         point.properties.distance = turfDistance.default(
@@ -129,25 +158,18 @@ const removePoint = () => {
     // Create command and push it to command log
     const id = data.features[0].properties.id
     const command = {
-        "action": "REMOVE_POINT",
+        "action": Action.REMOVE_POINT,
         "params": {
             "id": id
         }
     }
     commandLog.push(command)
-    console.log(commandLog)
-
-    // This removes the first element of the features array.
-
-    data.features.shift()
-
-    map.getSource('dots').setData(data)
+    render()
 }
 
 // Set up buttons
 const addButton = document.getElementById('addButton')
 addButton.onclick = addPoint
-
 
 const removeButton = document.getElementById('removeButton')
 removeButton.onclick = removePoint
