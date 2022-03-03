@@ -18,4 +18,4 @@ Start with:
 - [x] Render custom dot color
 - [x] Get closest point property to position.
 - [ ] Fix import of turfDistance
-- [ ] set mapboxgl.accessToken as environment var.
+- [x] set mapboxgl.accessToken as environment var.
