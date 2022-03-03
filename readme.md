@@ -3,6 +3,10 @@
 Start with: 
 `node index.js`
 
+## Testing locally
+
+`npx webpack serve`
+
 ## TODO
 
 - [x] Add buttons to the botton part of page
