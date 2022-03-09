@@ -1,11 +1,12 @@
 # This is the new and better dots.
 
-Start with: 
-`node index.js`
-
 ## Testing locally
 
-`npx webpack serve`
+for frontend
+`npx webpack serve` 
+
+for backend
+`npm run server`
 
 ## TODO
 
@@ -14,7 +15,7 @@ Start with:
   - [x] Add remove button
 - [x] Append a command log when clicking buttons
 - [x] Parse command log to GeoJson
-- [ ] Send commands when clicking the buttons on sockets.io
+- [x] Send commands when clicking the buttons on sockets.io
 - [x] Build with webpack
 - [ ] Use environment variable for sockets.io url
 - [x] Don't rely on CDN for mapbox
@@ -24,5 +25,24 @@ Start with:
 - [ ] Fix import of turfDistance
 - [x] set mapboxgl.accessToken as environment var.
 - [x] add render function.
-- [ ] listen to commands from sockets.io
+- [x] listen to commands from sockets.io
 - [ ] push to heroku
+- [x] set up database
+- [x] fix SQLITE_ERROR when trying to write to database.
+- [x] Send database content on socket connect.
+- [x] parse query param for context/map id
+- [x] send context with CLIENT_ACTION to server.
+- [x] Keep track on which contexts are connected to which sockets
+      (I think this is a bit like rooms, but I'd rather don't become
+      too reliant on Socket.io)
+- [x] Add context to sendActionLog query.
+- [ ] Zoom to bounding box of points
+   https://www.npmjs.com/package/turf-extent
+- [ ] Create docker-compose with reboot rule
+- [ ] Deploy
+- [ ] Commit latest changes
+- [ ] Clean up code a bit
+
+## Suggestions
+
+- [ ] Set limit on how far away points can be deleted

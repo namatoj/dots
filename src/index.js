@@ -3,6 +3,8 @@ const mapboxgl = require("mapbox-gl")
 // const { query } = require("express")
 const turfDistance = require("@turf/distance")
 const { v4: uuidv4 } = require("uuid")
+const { Action: Action } = require("./action.js")
+const socket = io("ws://localhost:3001");
 
 require('mapbox-gl/dist/mapbox-gl.css')
 require('./style.css')
@@ -63,20 +65,26 @@ map.on('load', () => {
             'circle-stroke-color': '#ffffff'
         }
     });
+
+    socket.on("CLIENT_ACTION", (command) => {
+        commandLog.push(command)
+        render()
+    })
+    socket.on("TRANSFER_ACTION_LOG", (msg) => {
+        console.log(msg)
+    })
+    socket.emit("CLIENT_CONNECTED", currentContext)
+
 })
 
 // Set point color
 const params = new URLSearchParams(window.location.search)
 const queryColor = params.get('color')
+const queryId = params.get('id')
+const currentContext = (queryId ? queryId : "")
 let currentColor = "#" + (queryColor ? queryColor : "000000")
 
 console.log(currentColor)
-
-
-const Action = {
-    ADD_POINT: "ADD_POINT",
-    REMOVE_POINT: "REMOVE_POINT"
-}
 
 const createPointFeature = (command) => {
     return ({
@@ -121,6 +129,7 @@ const addPoint = () => {
 
     // Create command and push it to command log
     const command = {
+        "context": currentContext,
         "action": Action.ADD_POINT,
         "params": {
             "id": uuid,
@@ -129,8 +138,11 @@ const addPoint = () => {
             "color": currentColor,
         }
     }
+    console.log(command)
     commandLog.push(command)
+    socket.emit("CLIENT_ACTION", command)
     render()
+
 }
 
 const removePoint = () => {
@@ -158,12 +170,14 @@ const removePoint = () => {
     // Create command and push it to command log
     const id = data.features[0].properties.id
     const command = {
+        "context": currentContext,
         "action": Action.REMOVE_POINT,
         "params": {
             "id": id
         }
     }
     commandLog.push(command)
+    socket.emit("CLIENT_ACTION", command)
     render()
 }
 
