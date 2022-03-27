@@ -49,6 +49,7 @@ for backend
 - [ ] Fix https for websocket // using https://mindsers.blog/post/https-using-nginx-certbot-docker/ for inspiration
 - [ ] Prevent adding dots if connection to backend fails
 - [ ] Set map id as query parameter if not set
+- [ ] Add cronjob for updating https certs
 
 ## Suggestions
 
