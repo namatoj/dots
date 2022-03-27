@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  action-log:
+    image: "ghcr.io/namatoj/dots/action-log:latest"
+    ports:
+      - "3001:3001"
