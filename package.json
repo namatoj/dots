@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "description": "Place dots, everywhere!",
     "scripts": {
-        "server": "node ./src/server.js"
+        "server": "node ./src/server.js",
+        "build": "webpack"
     },
     "dependencies": {
         "@turf/distance": "^6.5.0",
