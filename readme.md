@@ -40,7 +40,7 @@ for backend
    https://www.npmjs.com/package/turf-extent
 - [ ] Create docker-compose with reboot rule
 - [ ] Deploy
-- [ ] Commit latest changes
+- [x] Commit latest changes
 - [ ] Clean up code a bit
 
 ## Suggestions
