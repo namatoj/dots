@@ -48,6 +48,7 @@ for backend
 - [ ] Modify docker-compose to store database file outside of container
 - [ ] Fix https for websocket
 - [ ] Prevent adding dots if connection to backend fails
+- [ ] Set map id as query parameter if not set
 
 ## Suggestions
 
