@@ -5,7 +5,8 @@ const turfDistance = require("@turf/distance")
 const { v4: uuidv4 } = require("uuid")
 const { Action: Action } = require("./action.js")
 // const socket = io("ws://localhost:3001");
-const socket = io("ws://129.151.223.187:3001");
+// const socket = io("ws://129.151.223.187:3001");
+const socket = io("wss://action-log.cnuc.nu");
 
 require('mapbox-gl/dist/mapbox-gl.css')
 require('./style.css')
