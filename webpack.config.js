@@ -34,19 +34,16 @@ module.exports = {
             title: 'dots',
             template: 'src/index.html',
         }),
-        // new webpack.HotModuleReplacementPlugin(),
-        new Dotenv()
+        new Dotenv({ systemvars: true })
     ],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: "/dist/",
         clean: true,
     },
     devServer: {
         static: {
             directory: path.join(__dirname, "dist/"),
-            //publicPath: "http://localhost:3000/dist/",
         },
         port: 3000,
         hot: "only",
