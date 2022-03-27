@@ -46,7 +46,7 @@ for backend
 - [ ] Separate action-log to separate repository
 - [ ] Use environment variable for backend url
 - [ ] Modify docker-compose to store database file outside of container
-- [ ] Fix https for websocket
+- [ ] Fix https for websocket // using https://mindsers.blog/post/https-using-nginx-certbot-docker/ for inspiration
 - [ ] Prevent adding dots if connection to backend fails
 - [ ] Set map id as query parameter if not set
 
