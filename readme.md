@@ -39,9 +39,15 @@ for backend
 - [ ] Zoom to bounding box of points
    https://www.npmjs.com/package/turf-extent
 - [ ] Create docker-compose with reboot rule
-- [ ] Deploy
+- [x] Deploy backend
 - [x] Commit latest changes
 - [ ] Clean up code a bit
+- [ ] Deploy frontend on vercel or netlify
+- [ ] Separate action-log to separate repository
+- [ ] Use environment variable for backend url
+- [ ] Modify docker-compose to store database file outside of container
+- [ ] Fix https for websocket
+
 
 ## Suggestions
 
