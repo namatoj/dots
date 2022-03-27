@@ -42,12 +42,12 @@ for backend
 - [x] Deploy backend
 - [x] Commit latest changes
 - [ ] Clean up code a bit
-- [ ] Deploy frontend on vercel or netlify
+- [x] Deploy frontend on vercel or netlify
 - [ ] Separate action-log to separate repository
 - [ ] Use environment variable for backend url
 - [ ] Modify docker-compose to store database file outside of container
 - [ ] Fix https for websocket
-
+- [ ] Prevent adding dots if connection to backend fails
 
 ## Suggestions
 
