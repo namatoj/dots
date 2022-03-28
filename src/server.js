@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
         console.log('user disconnected');
     });
     socket.on('CLIENT_ACTION', (msg) => {
-        console.log(msg)
+        console.log(msg.context, msg.action)
 
         // Handle client action
         // TODO: Only emit msg to sockets of same context.
