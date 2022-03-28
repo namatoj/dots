@@ -47,8 +47,6 @@ const sendActionLog = (socket, context) => {
     console.log("in sendActionLog")
     db.each("SELECT context_id, action, payload FROM action_log WHERE context_id = ?", context, (err, row) => {
         msg = { 'action': row.action, 'params': JSON.parse(row.payload) }
-        console.log("next msg:")
-        console.log(msg)
         socket.emit('CLIENT_ACTION', msg)
     })
 }
