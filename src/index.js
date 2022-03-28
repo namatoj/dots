@@ -140,6 +140,12 @@ const addPoint = () => {
             "color": currentColor,
         }
     }
+
+    // Check if connection to server is still active
+    if (!socket.connected) {
+        console.log("Action made while not connected")
+        return
+    }
     console.log(command)
     commandLog.push(command)
     socket.emit("CLIENT_ACTION", command)
@@ -177,6 +183,12 @@ const removePoint = () => {
         "params": {
             "id": id
         }
+    }
+
+    // Check if connection to server is still active
+    if (!socket.connected) {
+        console.log("Action made while not connected")
+        return
     }
     commandLog.push(command)
     socket.emit("CLIENT_ACTION", command)
