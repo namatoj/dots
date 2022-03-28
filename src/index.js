@@ -83,6 +83,7 @@ map.on('load', () => {
 const url = new URL(window.location)
 const queryColor = url.searchParams.get('color')
 const queryId = url.searchParams.get('id')
+const querySave = url.searchParams.get('save')
 
 // Set current Context
 const currentContext = (queryId ? queryId : uuidv4())
@@ -91,6 +92,19 @@ window.history.pushState({}, '', url)
 
 // Set point color
 let currentColor = "#" + (queryColor ? queryColor : "000000")
+
+const downloadObject = (obj, name) => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(obj)], { type: "text/geojson" }));
+    a.download = name;
+    a.click();
+}
+
+// Call this function to export the loaded source data as a geojson file
+const exportData = () => {
+    console.log(map.getSource('dots'))
+    downloadObject(map.getSource('dots')._data, currentContext + '.geojson')
+}
 
 console.log(currentColor)
 

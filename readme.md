@@ -51,7 +51,7 @@ for backend
 - [x] Set map id as query parameter if not set
 - [ ] Add cronjob for updating https certs
 - [x] Remove parameters from server logging
-- [ ] export map as geojson
+- [ ] add button to call export map as geojson function
 
 ## Suggestions
 

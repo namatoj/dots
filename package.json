@@ -4,7 +4,8 @@
     "description": "Place dots, everywhere!",
     "scripts": {
         "server": "node ./src/server.js",
-        "build": "webpack"
+        "build": "webpack",
+        "dev": "webpack serve"
     },
     "dependencies": {
         "@turf/distance": "^6.5.0",
