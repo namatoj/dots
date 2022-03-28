@@ -79,11 +79,17 @@ map.on('load', () => {
 
 })
 
+// Get query parameters
+const url = new URL(window.location)
+const queryColor = url.searchParams.get('color')
+const queryId = url.searchParams.get('id')
+
+// Set current Context
+const currentContext = (queryId ? queryId : uuidv4())
+url.searchParams.set('id', currentContext)
+window.history.pushState({}, '', url)
+
 // Set point color
-const params = new URLSearchParams(window.location.search)
-const queryColor = params.get('color')
-const queryId = params.get('id')
-const currentContext = (queryId ? queryId : "")
 let currentColor = "#" + (queryColor ? queryColor : "000000")
 
 console.log(currentColor)

@@ -48,7 +48,7 @@ for backend
 - [x] Modify docker-compose to store database file outside of container
 - [x] Fix https for websocket // using https://mindsers.blog/post/https-using-nginx-certbot-docker/ for inspiration
 - [x] Prevent adding dots if connection to backend fails
-- [ ] Set map id as query parameter if not set
+- [x] Set map id as query parameter if not set
 - [ ] Add cronjob for updating https certs
 - [x] Remove parameters from server logging
 
