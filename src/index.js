@@ -84,14 +84,40 @@ const url = new URL(window.location)
 const queryColor = url.searchParams.get('color')
 const queryId = url.searchParams.get('id')
 const querySave = url.searchParams.get('save')
+const localStorageId = localStorage.getItem('id')
+const localStorageColor = localStorage.getItem('color')
 
 // Set current Context
-const currentContext = (queryId ? queryId : uuidv4())
-url.searchParams.set('id', currentContext)
-window.history.pushState({}, '', url)
+// If no queryId, use localStoreageId
+// If no localStorageId, make new id
+let currentContext
+if (queryId) {
+    currentContext = queryId
+} else if (localStorageId) {
+    currentContext = localStorageId
+} else {
+    currentContext = uuidv4()
+}
+
+
+// Set current color
+let currentColor
+if (queryColor) {
+    currentColor = '#' + queryColor
+} else if (localStorageColor) {
+    currentColor = localStorageColor
+} else {
+    currentColor = '#000000'
+}
+
+//const currentContext = (queryId ? queryId : uuidv4())
 
 // Set point color
-let currentColor = "#" + (queryColor ? queryColor : "000000")
+localStorage.setItem('color', currentColor)
+localStorage.setItem('id', currentContext)
+url.searchParams.set('id', currentContext)
+url.searchParams.set('color', currentColor.replace('#', ''))
+window.history.pushState({}, '', url)
 
 const downloadObject = (obj, name) => {
     const a = document.createElement('a');

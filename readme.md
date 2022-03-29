@@ -52,6 +52,7 @@ for backend
 - [ ] Add cronjob for updating https certs
 - [x] Remove parameters from server logging
 - [ ] add button to call export map as geojson function
+- [x] Use local storage to store the id of the last visited map id.
 
 ## Suggestions
 
